@@ -1,4 +1,5 @@
 const path = require('path')
+const vueConfig = require('./vue-loader.config')
 
 module.exports = {
   devtool: '#source-map',
@@ -11,14 +12,12 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'client-bundle.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, '../node_modules'),
-  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: vueConfig
       },
       {
         test: /\.js$/,
@@ -28,18 +27,11 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url',
-        query: {
+        options: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
         }
       }
-    ]
-  },
-  vue: {
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 3 versions']
-      })
     ]
   }
 }

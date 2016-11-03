@@ -53,7 +53,7 @@ app.use(serverStatic('./dist'));
 console.log('232232')
 
 Router.get('/*', function* () {
-  console.profile('性能分析器');
+  // console.profile('性能分析器');
   console.log('本次进入刷新次数：', ++number);
   const res = this.res;
   const req = this.req 
@@ -94,7 +94,7 @@ Router.get('/*', function* () {
   renderStream.on('error', err => {
     throw err
   })
-  console.profileEnd()
+  // console.profileEnd()
 });
 // Router.get('/xx', (ctx, next) => {
 //   console.log('num', ++ number)
