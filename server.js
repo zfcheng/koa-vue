@@ -48,8 +48,15 @@ function createRenderer (bundle) {
   })
 }
 
-app.use(serverStatic('./dist'));
-
+app.use(serverStatic('./'));
+app.use(function * (next) {
+  console.log('!!!!!!!!!')
+  yield next
+})
+app.use(function * (next) {
+  console.log('@@@@@@@@@')
+  yield next
+})
 console.log('232232')
 
 Router.get('/*', function* () {
@@ -101,14 +108,18 @@ Router.get('/*', function* () {
 //   console.log('xx')
 // });
 
-
+app.use(function * (next) {
+  console.log('#########')
+  yield next
+})
 app
   .use(Router.routes())
   .use(Router.allowedMethods());
 
 
 
-const port = process.env.PORT || 8080
+
+const port = process.env.PORT || 8081
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
 })
